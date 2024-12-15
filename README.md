@@ -20,7 +20,6 @@ By simulating a scenario with **100 concurrent users**, the system demonstrates 
 ### 3. **Transaction Management and Data Consistency**
    - Ensured data consistency with **transaction management** (`commit`, `rollback`) to maintain ACID properties, preventing data anomalies in a high-concurrency environment.
 
-# Ticket Booking System
 
 ## Files and Order of Execution
 
