@@ -15,6 +15,7 @@ public class TicketBookingSystem {
             connection.setAutoCommit(false); // Start transaction
 
             // Skip locked rows using the `FOR UPDATE SKIP LOCKED` query
+            // Update locked rows using the `UPDATE` query;
             String query = "SELECT seat_id, seat_name FROM seats WHERE user_id IS NULL LIMIT 1 FOR UPDATE SKIP LOCKED";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 ResultSet resultSet = stmt.executeQuery();
