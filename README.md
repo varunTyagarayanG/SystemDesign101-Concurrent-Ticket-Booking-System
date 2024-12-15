@@ -9,6 +9,17 @@ The core functionality relies on **database locking techniques** such as `UPDATE
 
 By simulating a scenario with **100 concurrent users**, the system demonstrates the importance of proper locking mechanisms in preventing inconsistencies and ensuring a seamless user experience.
 
+## Key Skills Showcased
+
+### 1. **Concurrency and Multi-threading**
+   - Managed concurrent users with multi-threading (`ExecutorService`) to handle seat bookings efficiently in a simulated real-world environment.
+
+### 2. **Database Management and Locking Mechanisms**
+   - Integrated MySQL for data storage and demonstrated advanced **locking techniques** like **pessimistic locking** and **skip locks** (`FOR UPDATE SKIP LOCKED`) to handle concurrent updates without conflicts.
+
+### 3. **Transaction Management and Data Consistency**
+   - Ensured data consistency with **transaction management** (`commit`, `rollback`) to maintain ACID properties, preventing data anomalies in a high-concurrency environment.
+
 ## Prerequisites
 
 Before running the project, ensure that you have the following installed:
