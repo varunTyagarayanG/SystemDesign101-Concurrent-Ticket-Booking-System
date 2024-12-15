@@ -9,6 +9,50 @@ The core functionality relies on **database locking techniques** such as `UPDATE
 
 By simulating a scenario with **100 concurrent users**, the system demonstrates the importance of proper locking mechanisms in preventing inconsistencies and ensuring a seamless user experience.
 
+## Key Skills Showcased
+
+### 1. **Concurrency and Multi-threading**
+   - Managed concurrent users with multi-threading (`ExecutorService`) to handle seat bookings efficiently in a simulated real-world environment.
+
+### 2. **Database Management and Locking Mechanisms**
+   - Integrated MySQL for data storage and demonstrated advanced **locking techniques** like **pessimistic locking** and **skip locks** (`FOR UPDATE SKIP LOCKED`) to handle concurrent updates without conflicts.
+
+### 3. **Transaction Management and Data Consistency**
+   - Ensured data consistency with **transaction management** (`commit`, `rollback`) to maintain ACID properties, preventing data anomalies in a high-concurrency environment.
+
+
+## Files and Order of Execution
+
+1. **`FlightCreator`**  
+   - Responsible for creating the `trips` table and inserting flight information.
+
+2. **`SeatsCreator`**  
+   - Used for creating the `seats` table and initializing the seat information.
+
+3. **`UserInserter`**  
+   - Adds user information to the database for booking.
+
+4. **`NoLocking`**  
+   - Contains a simple implementation of booking seats without any locking mechanism.
+
+5. **`WorstImplementation`**  
+   - Simulates a bad implementation of seat booking without proper concurrency handling.
+
+6. **`TicketBookingSystem`**  
+   - Main entry point for the ticket booking system. Handles seat booking with concurrency management.
+
+## Execution Order
+
+1. **First**, run `FlightCreator` to set up flight data.
+2. **Then**, run `SeatsCreator` to set up seat data.
+3. **Next**, run `UserInserter` to insert user data into the database.
+4. **After that**, run `WorstImplementation` to simulate the booking without locks.
+5. **Finally**, run `TicketBookingSystem` for the main functionality with proper concurrency handling.
+
+---
+
+Ensure that the database schema and tables are created as needed before running these implementations.
+
 ## Prerequisites
 
 Before running the project, ensure that you have the following installed:
