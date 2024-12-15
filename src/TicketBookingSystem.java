@@ -7,7 +7,7 @@ public class TicketBookingSystem {
     // Database connection details
     static final String URL = "jdbc:mysql://localhost:3306/TicketBookingSystem";
     static final String USER = "root";
-    static final String PASSWORD = "Tyagi#2004"; // Update with your MySQL password
+    static final String PASSWORD = "userPass"; // Update with your MySQL password
 
     // Book a seat for a user
     public static boolean bookSeat(int userId) {
