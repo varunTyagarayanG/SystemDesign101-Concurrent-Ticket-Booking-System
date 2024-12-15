@@ -9,7 +9,7 @@ public class UserInserter {
     // JDBC URL, username, and password
     private static final String URL = "jdbc:mysql://localhost:3306/TicketBookingSystem";
     private static final String USER = "root"; // Replace with your MySQL username
-    private static final String PASSWORD = "Tyagi#2004"; // Replace with your MySQL password
+    private static final String PASSWORD = "YourPASS"; // Replace with your MySQL password
 
     public static void main(String[] args) {
         try {
