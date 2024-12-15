@@ -20,6 +20,40 @@ By simulating a scenario with **100 concurrent users**, the system demonstrates 
 ### 3. **Transaction Management and Data Consistency**
    - Ensured data consistency with **transaction management** (`commit`, `rollback`) to maintain ACID properties, preventing data anomalies in a high-concurrency environment.
 
+# Ticket Booking System
+
+## Files and Order of Execution
+
+1. **`FlightCreator`**  
+   - Responsible for creating the `trips` table and inserting flight information.
+
+2. **`SeatsCreator`**  
+   - Used for creating the `seats` table and initializing the seat information.
+
+3. **`UserInserter`**  
+   - Adds user information to the database for booking.
+
+4. **`NoLocking`**  
+   - Contains a simple implementation of booking seats without any locking mechanism.
+
+5. **`WorstImplementation`**  
+   - Simulates a bad implementation of seat booking without proper concurrency handling.
+
+6. **`TicketBookingSystem`**  
+   - Main entry point for the ticket booking system. Handles seat booking with concurrency management.
+
+## Execution Order
+
+1. **First**, run `FlightCreator` to set up flight data.
+2. **Then**, run `SeatsCreator` to set up seat data.
+3. **Next**, run `UserInserter` to insert user data into the database.
+4. **After that**, run `WorstImplementation` to simulate the booking without locks.
+5. **Finally**, run `TicketBookingSystem` for the main functionality with proper concurrency handling.
+
+---
+
+Ensure that the database schema and tables are created as needed before running these implementations.
+
 ## Prerequisites
 
 Before running the project, ensure that you have the following installed:
