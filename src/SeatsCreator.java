@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 public class SeatsCreator {
     private static final String URL = "jdbc:mysql://localhost:3306/TicketBookingSystem"; // Database URL
     private static final String USER = "root"; // MySQL username
-    private static final String PASSWORD = "Tyagi#2004"; // MySQL password
+    private static final String PASSWORD = "YourPASS"; // MySQL password
 
     /*
     CREATE TABLE IF NOT EXISTS seats (
