@@ -7,7 +7,7 @@ public class TicketBookingSystem {
     // Database connection details
     static final String URL = "jdbc:mysql://localhost:3306/TicketBookingSystem";
     static final String USER = "root";
-    static final String PASSWORD = "YourPASS"; // Update with your MySQL password
+    static final String PASSWORD = "Tyagi#2004"; // Update with your MySQL password
 
     // Book a seat for a user
     public static boolean bookSeat(int userId) {
@@ -15,7 +15,6 @@ public class TicketBookingSystem {
             connection.setAutoCommit(false); // Start transaction
 
             // Skip locked rows using the `FOR UPDATE SKIP LOCKED` query
-            // Update locked rows using the `UPDATE` query;
             String query = "SELECT seat_id, seat_name FROM seats WHERE user_id IS NULL LIMIT 1 FOR UPDATE SKIP LOCKED";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 ResultSet resultSet = stmt.executeQuery();
@@ -57,60 +56,50 @@ public class TicketBookingSystem {
             String query = "SELECT seat_name, user_id FROM seats ORDER BY seat_id";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 ResultSet resultSet = stmt.executeQuery();
-
+    
                 int bookedCount = 0;
                 String[][] grid = new String[10][10]; // 10x10 grid for seats
-                String[][] bookedBy = new String[10][10]; // To store user names for booked seats
-
+    
+                // Initialize the grid with "-" for available seats
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        grid[i][j] = "-";
+                    }
+                }
+    
+                // Populate the grid with seat data
                 while (resultSet.next()) {
                     String seatName = resultSet.getString("seat_name");
                     int userId = resultSet.getInt("user_id");
-
-                    // If user_id is not null, it means the seat is booked
-                    String status = (userId == 0) ? "-" : "X";
-
-                    // Extract row (numeric part) and column (letter part) from seat_name
-                    int row = Integer.parseInt(seatName.replaceAll("[^0-9]", "")) - 1; // Remove non-numeric part and convert
-                    int col = seatName.replaceAll("[^A-Za-z]", "").charAt(0) - 'A'; // Get the alphabet part (A=0, B=1, etc.)
-
-                    grid[row][col] = status; // Mark the seat as booked (X) or available (-)
+    
+                    // Extract row and column from seat_name
+                    // For example, seatName = "5C" -> row = 4 (indexing starts from 0), col = 2 (C -> 2)
+                    int row = Integer.parseInt(seatName.replaceAll("[^0-9]", "")) - 1; // Extract number and subtract 1
+                    int col = seatName.replaceAll("[^A-Za-z]", "").charAt(0) - 'A'; // Extract letter and convert to index
+    
+                    // Mark the seat as booked (X) or available (-)
                     if (userId != 0) {
-                        bookedCount++; // Count how many seats are booked
-                        // Store the user's seat name in the grid
-                        bookedBy[row][col] = "User " + userId + " (" + seatName + ")";
-                    } else {
-                        bookedBy[row][col] = null; // If available, no user booked it
+                        grid[row][col] = "X"; // Booked seat
+                        bookedCount++;
                     }
                 }
-
-                // Print the grid with booking status and users
+    
+                // Print the grid
                 System.out.println("\nSeat Availability Grid (X = Booked, - = Available):");
                 for (int i = 0; i < 10; i++) {
                     for (int j = 0; j < 10; j++) {
-                        if (grid[i][j] == null) {
-                            grid[i][j] = "-"; // Empty spots
-                        }
                         System.out.print(grid[i][j] + " ");
                     }
                     System.out.println();
                 }
-
-                // Print users who booked each seat at the end
-                System.out.println("\nSeats Booked by Users:");
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        if (bookedBy[i][j] != null) {
-                            System.out.println(bookedBy[i][j]);
-                        }
-                    }
-                }
-
+    
                 System.out.println("\nTotal Booked Seats: " + bookedCount);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
 
     // Reset all seats (user_id) to NULL after booking is complete
     public static void resetSeats() {
